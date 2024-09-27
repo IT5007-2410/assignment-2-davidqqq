@@ -1,34 +1,34 @@
-/*Q1. JS Variable needs to be created here. Below variable is just an example. Try to add more attributes.*/
 const initialTravellers = [
   {
-    id: 1, name: 'Jack', phone: 88885555,
+    id: 1,
+    name: "Jack",
+    phone: 88885555,
     bookingTime: new Date(),
   },
   {
-    id: 2, name: 'Rose', phone: 88884444,
+    id: 2,
+    name: "Rose",
+    phone: 88884444,
     bookingTime: new Date(),
   },
 ];
 
-
-function TravellerRow(props) {
-  {/*Q3. Placeholder to initialize local variable based on traveller prop.*/}
+function TravellerRow({ traveller }) {
   return (
     <tr>
-	  {/*Q3. Placeholder for rendering one row of a table with required traveller attribute values.*/}
+      <td>{traveller.id}</td>
+      <td>{traveller.name}</td>
+      <td>{traveller.phone}</td>
+      <td>{traveller.bookingTime.toLocaleString()}</td>
     </tr>
   );
 }
 
-function Display(props) {
-  
-	/*Q3. Write code to render rows of table, reach corresponding to one traveller. Make use of the TravellerRow function that draws one row.*/
-
+function Display({ travellers }) {
   return (
-    <table className="bordered-table">
+    <table className='bordered-table'>
       <thead>
         <tr>
-	  {/*Q3. Below table is just an example. Add more columns based on the traveller attributes you choose.*/}
           <th>ID</th>
           <th>Name</th>
           <th>Phone</th>
@@ -36,116 +36,137 @@ function Display(props) {
         </tr>
       </thead>
       <tbody>
-        {/*Q3. write code to call the JS variable defined at the top of this function to render table rows.*/}
+        {travellers.map((traveller) => (
+          <TravellerRow key={traveller.id} traveller={traveller} />
+        ))}
       </tbody>
     </table>
   );
 }
 
-class Add extends React.Component {
-  constructor() {
-    super();
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+function Add({ bookTraveller }) {
+  const [name, setName] = React.useState("");
+  const [phone, setPhone] = React.useState("");
 
-  handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    /*Q4. Fetch the passenger details from the add form and call bookTraveller()*/
-  }
+    const newTraveller = {
+      id: Date.now(), // Unique ID
+      name,
+      phone: parseInt(phone),
+      bookingTime: new Date(),
+    };
+    bookTraveller(newTraveller);
+    setName("");
+    setPhone("");
+  };
 
-  render() {
-    return (
-      <form name="addTraveller" onSubmit={this.handleSubmit}>
-	    {/*Q4. Placeholder to enter passenger details. Below code is just an example.*/}
-        <input type="text" name="travellername" placeholder="Name" />
-        <button>Add</button>
-      </form>
-    );
-  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type='text'
+        name='travellername'
+        placeholder='Name'
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <input
+        type='text'
+        name='travellerphone'
+        placeholder='Phone'
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+      />
+      <button type='submit'>Add</button>
+    </form>
+  );
 }
 
+function Delete({ deleteTraveller }) {
+  const [id, setId] = React.useState("");
 
-class Delete extends React.Component {
-  constructor() {
-    super();
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    /*Q5. Fetch the passenger details from the deletion form and call deleteTraveller()*/
-  }
+    deleteTraveller(id);
+    setId("");
+  };
 
-  render() {
-    return (
-      <form name="deleteTraveller" onSubmit={this.handleSubmit}>
-	    {/*Q5. Placeholder form to enter information on which passenger's ticket needs to be deleted. Below code is just an example.*/}
-	<input type="text" name="travellername" placeholder="Name" />
-        <button>Delete</button>
-      </form>
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type='number'
+        name='travellerid'
+        placeholder='Traveller Id'
+        value={id}
+        onChange={(e) => setId(Number.parseInt(e.target.value))}
+      />
+      <button type='submit'>Delete</button>
+    </form>
+  );
+}
+
+function Homepage() {
+  // Simulated visual representation of free seats
+  return (
+    <div>
+      <h2>Visual Representation of Free Seats</h2>
+      {/* Placeholder to visually represent free seats */}
+    </div>
+  );
+}
+
+function TicketToRide() {
+  const [travellers, setTravellers] = React.useState(initialTravellers);
+  const [selector, setSelector] = React.useState(1);
+  const [incrementingId, setIncrementingId] = React.useState(travellers.length);
+
+  const bookTraveller = (newTraveller) => {
+    const traveller = makeNewTraveller(newTraveller.name, newTraveller.phone);
+    setTravellers((prevTravellers) => [...prevTravellers, traveller]);
+    setIncrementingId((prevId) => prevId + 1);
+  };
+
+  const deleteTraveller = (idToDelete) => {
+    console.log(travellers);
+    if (!travellers.some((traveller) => traveller.id === idToDelete)) {
+      alert("Traveller not found");
+      return;
+    }
+    setTravellers((prevTravellers) =>
+      prevTravellers.filter((traveller) => traveller.id !== idToDelete)
     );
-  }
-}
+    alert("Traveller deleted");
+  };
 
-class Homepage extends React.Component {
-	constructor() {
-	super();
-	}
-	render(){
-	return (
-	<div>
-		{/*Q2. Placeholder for Homepage code that shows free seats visually.*/}
-	</div>);
-	}
-}
-class TicketToRide extends React.Component {
-  constructor() {
-    super();
-    this.state = { travellers: [], selector: 1};
-    this.bookTraveller = this.bookTraveller.bind(this);
-    this.deleteTraveller = this.deleteTraveller.bind(this);
-  }
-
-  setSelector(value)
-  {
-  	/*Q2. Function to set the value of component selector variable based on user's button click.*/
-  }
-  componentDidMount() {
-    this.loadData();
-  }
-
-  loadData() {
-    setTimeout(() => {
-      this.setState({ travellers: initialTravellers });
-    }, 500);
-  }
-
-  bookTraveller(passenger) {
-	    /*Q4. Write code to add a passenger to the traveller state variable.*/
-  }
-
-  deleteTraveller(passenger) {
-	  /*Q5. Write code to delete a passenger from the traveller state variable.*/
-  }
-  render() {
-    return (
+  const makeNewTraveller = (name, phone) => {
+    return {
+      id: incrementingId + 1, // Unique ID
+      name,
+      phone: parseInt(phone),
+      bookingTime: new Date(),
+    };
+  };
+  return (
+    <div>
+      <h1>Ticket To Ride</h1>
       <div>
-        <h1>Ticket To Ride</h1>
-	<div>
-	    {/*Q2. Code for Navigation bar. Use basic buttons to create a nav bar. Use states to manage selection.*/}
-	</div>
-	<div>
-		{/*Only one of the below four divisions is rendered based on the button clicked by the user.*/}
-		{/*Q2 and Q6. Code to call Instance that draws Homepage. Homepage shows Visual Representation of free seats.*/}
-		{/*Q3. Code to call component that Displays Travellers.*/}
-		
-		{/*Q4. Code to call the component that adds a traveller.*/}
-		{/*Q5. Code to call the component that deletes a traveller based on a given attribute.*/}
-	</div>
+        {/* Navigation bar */}
+        <button onClick={() => setSelector(1)}>Homepage</button>
+        <button onClick={() => setSelector(2)}>View Travellers</button>
+        <button onClick={() => setSelector(3)}>Add Traveller</button>
+        <button onClick={() => setSelector(4)}>Delete Traveller</button>
       </div>
-    );
-  }
+      <div>
+        {/* Conditionally render based on selected option */}
+        {selector === 1 && <Homepage />}
+        {selector === 2 && <Display travellers={travellers} />}
+        {selector === 3 && <Add bookTraveller={bookTraveller} />}
+        {selector === 4 && <Delete deleteTraveller={deleteTraveller} />}
+      </div>
+    </div>
+  );
 }
 
 const element = <TicketToRide />;
 
-ReactDOM.render(element, document.getElementById('contents'));
+ReactDOM.render(element, document.getElementById("contents"));
