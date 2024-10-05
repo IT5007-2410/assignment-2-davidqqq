@@ -10,8 +10,91 @@
 
   <script src="https://unpkg.com/@babel/polyfill@7/dist/polyfill.min.js"></script>
   <style>
-    table.bordered-table th, td {border: 1px solid silver; padding: 4px;}
-    table.bordered-table {border-collapse: collapse;}
+    table.bordered-table th,
+    td {
+      border: 1px solid silver;
+      padding: 4px;
+    }
+
+    table.bordered-table {
+      border-collapse: collapse;
+    }
+
+    /* SeatLayout.css */
+    .seat-layout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .legend {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .legend-item {
+      margin: 0 10px;
+      padding: 5px 10px;
+      border-radius: 5px;
+      color: white;
+    }
+
+    .legend-item.extra {
+      background-color: #ff8c00;
+    }
+
+    .legend-item.forward {
+      background-color: #2e8b57;
+    }
+
+    .legend-item.standard {
+      background-color: #3cb371;
+    }
+
+    .seats {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .seat-row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 5px;
+    }
+
+    .seat {
+      width: 30px;
+      height: 30px;
+      margin: 2px;
+      border-radius: 5px;
+    }
+
+    .seat.extra {
+      background-color: #ff8c00;
+    }
+
+    .seat.forward {
+      background-color: #2e8b57;
+    }
+
+    .seat.standard {
+      background-color: #3cb371;
+    }
+
+    .seat.occupied {
+      background-color: #a9a9a9;
+    }
+
+    .seat.selected {
+      background-color: #ff4500;
+    }
+
+    .seat.aisle {
+      width: 15px;
+      height: 30px;
+      background: transparent;
+    }
   </style>
 </head>
 
