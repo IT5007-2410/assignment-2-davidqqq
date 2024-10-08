@@ -355,6 +355,18 @@ function TicketToRide() {
   const [selector, setSelector] = React.useState(1);
   const [incrementingId, setIncrementingId] = React.useState(travellers.length);
 
+  /** Q4 start */
+  const makeNewTraveller = (name, phone, row, seat) => {
+    return {
+      id: incrementingId + 1, // Unique ID
+      name,
+      phone: parseInt(phone),
+      bookingTime: new Date(),
+      row: parseInt(row),
+      seat: parseInt(seat),
+    };
+  };
+
   const bookTraveler = (newTraveller) => {
     const traveller = makeNewTraveller(
       newTraveller.name,
@@ -365,7 +377,9 @@ function TicketToRide() {
     setTravellers((prevTravellers) => [...prevTravellers, traveller]);
     setIncrementingId((prevId) => prevId + 1);
   };
+  /** Q4 end */
 
+  /** Q5 start */
   const deleteTraveller = (idToDelete) => {
     if (!travellers.some((traveller) => traveller.id === idToDelete)) {
       alert("Traveller not found");
@@ -377,16 +391,8 @@ function TicketToRide() {
     alert("Traveller deleted");
   };
 
-  const makeNewTraveller = (name, phone, row, seat) => {
-    return {
-      id: incrementingId + 1, // Unique ID
-      name,
-      phone: parseInt(phone),
-      bookingTime: new Date(),
-      row: parseInt(row),
-      seat: parseInt(seat),
-    };
-  };
+  /** Q5 end */
+
   /** Q2 start */
   return (
     <div>
