@@ -31,7 +31,7 @@ function TravellerRow({ traveller }) {
     </tr>
   );
 }
-
+/** Q3 start */
 function Display({ travellers }) {
   return (
     <table className='bordered-table'>
@@ -53,7 +53,7 @@ function Display({ travellers }) {
     </table>
   );
 }
-
+/** Q3 end */
 function Add({ bookTraveler }) {
   const [name, setName] = React.useState("");
   const [phone, setPhone] = React.useState("");
