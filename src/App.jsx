@@ -1,3 +1,4 @@
+/** Q1 start */
 const initialTravellers = [
   {
     id: 1,
@@ -16,6 +17,7 @@ const initialTravellers = [
     seat: 1,
   },
 ];
+/** Q1 end */
 
 function TravellerRow({ traveller }) {
   return (
