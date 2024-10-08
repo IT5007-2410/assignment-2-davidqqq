@@ -63,6 +63,10 @@ function Add({ bookTraveler }) {
   const [seat, setSeat] = React.useState("");
 
   const handleSubmit = (e) => {
+    if (!name || !phone) {
+      alert("Please fill in all fields");
+      return;
+    }
     e.preventDefault();
     const newTraveler = {
       id: Date.now(), // Unique ID
