@@ -117,6 +117,7 @@ function Add({ bookTraveler }) {
 }
 /** Q4 end */
 
+/** Q5 start */
 function Delete({ deleteTraveller }) {
   const [id, setId] = React.useState("");
 
@@ -139,6 +140,9 @@ function Delete({ deleteTraveller }) {
     </form>
   );
 }
+/** Q5 end */
+
+/** Q6 start */
 
 const SEAT_TYPES = {
   EXTRA: "extra",
@@ -328,6 +332,9 @@ const SeatLayout = ({ travellers }) => {
     </div>
   );
 };
+
+/** Q6 end */
+
 function Homepage({ travellers }) {
   // Simulated visual representation of free seats
   return (
