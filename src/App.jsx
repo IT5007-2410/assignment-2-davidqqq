@@ -54,6 +54,8 @@ function Display({ travellers }) {
   );
 }
 /** Q3 end */
+
+/** Q4 start */
 function Add({ bookTraveler }) {
   const [name, setName] = React.useState("");
   const [phone, setPhone] = React.useState("");
@@ -113,6 +115,7 @@ function Add({ bookTraveler }) {
     </form>
   );
 }
+/** Q4 end */
 
 function Delete({ deleteTraveller }) {
   const [id, setId] = React.useState("");
