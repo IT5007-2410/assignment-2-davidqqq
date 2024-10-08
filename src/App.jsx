@@ -373,6 +373,7 @@ function TicketToRide() {
       seat: parseInt(seat),
     };
   };
+  /** Q2 start */
   return (
     <div>
       <h1>Ticket To Ride</h1>
@@ -393,7 +394,7 @@ function TicketToRide() {
     </div>
   );
 }
-
+/** Q2 end */
 const element = <TicketToRide />;
 
 ReactDOM.render(element, document.getElementById("contents"));
