@@ -26,8 +26,8 @@ function TravellerRow({ traveller }) {
       <td>{traveller.name}</td>
       <td>{traveller.phone}</td>
       <td>{traveller.bookingTime.toLocaleString()}</td>
-      <td>{traveller.row}</td>
-      <td>{traveller.seat}</td>
+      {/* <td>{traveller.row}</td>
+      <td>{traveller.seat}</td> */}
     </tr>
   );
 }
@@ -41,8 +41,8 @@ function Display({ travellers }) {
           <th>Name</th>
           <th>Phone</th>
           <th>Booking Time</th>
-          <th>Row</th>
-          <th>Seat</th>
+          {/* <th>Row</th>
+          <th>Seat</th> */}
         </tr>
       </thead>
       <tbody>
@@ -95,7 +95,7 @@ function Add({ bookTraveler }) {
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
       />
-      <input
+      {/* <input
         type='number'
         name='row'
         placeholder='Row'
@@ -109,7 +109,7 @@ function Add({ bookTraveler }) {
         placeholder='Seat'
         value={seat}
         onChange={(e) => setSeat(e.target.value)}
-      />
+      /> */}
 
       <button type='submit'>Add</button>
     </form>
